@@ -1,0 +1,1736 @@
+<html>
+<head>
+	<title>
+		Alien Invasion
+	</title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+<html>
+	<head>
+		<title>
+			Custom Game LVL 1
+		</title>
+		<script src="https://simplycodingcourses.com/files/simply.js"></script>
+		<script>
+		var level = [];
+		function start(){
+			sjs.open("target",1200,750);
+			//background properties
+			var background = new sjs.Image("Images/background.png");
+			background.setSize(1200,750);
+			//player properties
+			var player = new sjs.Image("Images/player.png");
+			player.type = "player";
+			player.setSize(50,75);
+			player.setGravity();
+			player.friction = 0.2;
+			player.noBounds = true;
+			player.bottom();
+
+			sjs.loadImageArray('[{"width":63,"height":100,"x":358,"y":649,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":418,"y":647,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":496,"y":646,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":574,"y":645,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":50,"height":50,"x":443,"y":597,"sx":0,"sy":0,"ay":1,"topSpeed":10,"src":"Images/crate.png","alt":"add text","type":"crate","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":652,"y":547,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":100,"height":75,"x":517,"y":570,"sx":1.5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/enemy-walkright/enemy_walk9gif.gif","alt":"add text","type":"enemy","facingLeft":false,"left_img":"Images/enemy-walkleft/enemy-walkleftgif.gif","right_img":"Images/enemy-walkright/enemy_walk9gif.gif","friction":0,"classType":"Image","noBounds":true},{"width":50,"height":50,"x":188,"y":700,"sx":0,"sy":0,"ay":1,"topSpeed":10,"src":"Images/crate.png","alt":"add text","type":"crate","friction":0,"classType":"Image","noBounds":true},{"width":100,"height":75,"x":242.5,"y":675,"sx":1.5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/enemy-walkright/enemy_walk9gif.gif","alt":"add text","type":"enemy","facingLeft":false,"left_img":"Images/enemy-walkleft/enemy-walkleftgif.gif","right_img":"Images/enemy-walkright/enemy_walk9gif.gif","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":652,"y":449,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":247,"y":522,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":110,"y":422,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":168,"y":521,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":50,"height":50,"x":267,"y":472,"sx":0,"sy":1,"ay":1,"topSpeed":10,"src":"Images/crate.png","alt":"add text","type":"crate","friction":0,"classType":"Image","noBounds":true},{"width":100,"height":75,"x":167,"y":446,"sx":-2.5,"sy":0,"ay":1,"topSpeed":10,"src":"Images/enemy-walkleft/enemy-walkleftgif.gif","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/enemy-walkleft/enemy-walkleftgif.gif","right_img":"Images/enemy-walkright/enemy_walk9gif.gif","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":366,"y":397,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":444,"y":397,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":522,"y":349,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":713,"y":510,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":841,"y":649,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":100,"height":75,"x":1051.5,"y":675,"sx":1.5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/enemy-walkright/enemy_walk9gif.gif","alt":"add text","type":"enemy","facingLeft":false,"left_img":"Images/enemy-walkleft/enemy-walkleftgif.gif","right_img":"Images/enemy-walkright/enemy_walk9gif.gif","friction":0,"classType":"Image","noBounds":true}]');
+
+
+			//player keydowns
+			var r_images = ["Images/player_rwalk/rwalk_1.png","Images/player_rwalk/rwalk_2.png","Images/player_rwalk/rwalk_3.png","Images/player_rwalk/rwalk_4.png","Images/player_rwalk/rwalk_5.png","Images/player_rwalk/rwalk_6.png","Images/player_rwalk/rwalk_7.png","Images/player_rwalk/rwalk_8.png","Images/player_rwalk/rwalk_9.png","Images/player_rwalk/rwalk_10.png","Images/player_rwalk/rwalk_11.png","Images/player_rwalk/rwalk_12.png","Images/player_rwalk/rwalk_13.png","Images/player_rwalk/rwalk_14.png","Images/player_rwalk/rwalk_15.png","Images/player_rwalk/rwalk_16.png"];
+			var l_images = ["Images/player_lwalk/lwalk_1.png","Images/player_lwalk/lwalk_2.png","Images/player_lwalk/lwalk_3.png","Images/player_lwalk/lwalk_4.png","Images/player_lwalk/lwalk_5.png","Images/player_lwalk/lwalk_6.png","Images/player_lwalk/lwalk_7.png","Images/player_lwalk/lwalk_8.png","Images/player_lwalk/lwalk_9.png","Images/player_lwalk/lwalk_10.png","Images/player_lwalk/lwalk_11.png","Images/player_lwalk/lwalk_12.png","Images/player_lwalk/lwalk_13.png","Images/player_lwalk/lwalk_14.png","Images/player_lwalk/lwalk_15.png","Images/player_lwalk/lwalk_16.png",];
+			var r_facing = true;
+			var r_track = 0;
+			var l_track = 0;
+			
+			sjs.keyDown(RIGHT_KEY, function(){
+				player.pushRight(1);
+				r_facing = true;
+				r_track = r_track + 1;
+				player.setImage(r_images[r_track]);
+				if(r_track == 15){
+					r_track = 0;
+				}
+			});
+			sjs.keyDown(LEFT_KEY, function(){
+				player.pushLeft(1);
+				r_facing = false;
+				l_track = l_track + 1;
+				player.setImage(l_images[l_track]);
+				if(l_track == 15){
+					l_track = 0;
+				}
+
+			});
+
+			var shoot = true;
+			sjs.keyDown(SPACE_KEY, function(){
+				if(shoot == true){
+					var laser = new sjs.Image("Images/laser1.png");
+					laser.type = "laser";
+					laser.friction = 0;
+					laser.noBounds = true;
+					laser.setSize(100,50);
+					shoot = false;
+				} if (r_facing == true) {
+					player.setImage("Images/player-rightshoot/player-rightshootgif.gif")
+					laser.moveTo(player.getX()+1,player.getY()+7);
+					laser.pushRight(25.5);
+				} else if (r_facing == false){
+					player.setImage("Images/player-leftshoot/player-leftshootgif.gif")
+					laser.moveTo(player.getX()+-60,player.getY()+7);
+					laser.pushLeft(25.5)
+				}
+				setTimeout(function(){
+					shoot = true;
+				},2000);
+			});
+
+
+
+
+			//jumping
+			
+			var jump = true;
+			sjs.keyDown(UP_KEY, function(){
+				if(jump == true){
+					jump = false;
+					player.pushUp(15);
+				}
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == RIGHT_KEY){
+					player.setImage("Images/player.png");
+					r_track = 0;
+				} else if (e.keyCode == LEFT_KEY){
+					player.setImage("Images/player.png");
+					l_track = 0;
+				}	
+			});
+
+			//onhits
+
+			sjs.onHit("player","bottom_screen", function(x,y){
+				jump = true;
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("crate","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			sjs.onHit("crate",["left_screen","right_screen"], function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(y,x);
+				}
+
+			});
+			sjs.onHit("player","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			
+			sjs.onHit("player","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall2", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("player","left_screen", function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("player","right_screen", function(x,y){
+				window.location = "level1.secondpage.html";
+			});
+
+
+			sjs.onHit("crate","wall2", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("enemy","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("player","enemy", function(x,y){
+				x.destroy();
+				window.location = "gameover.html";
+			});
+
+			sjs.onHit("enemy","laser", function(x,y){
+				x.destroy();
+				y.destroy();
+			});
+
+			sjs.onHit("laser",["crate","wall","wall2"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		} // end start
+
+
+
+
+
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>
+			Custom Game LVL 1
+		<center>
+		</center>
+		</h1>
+		<br>
+		</br>
+		<div id="target" style="margin:auto;background:grey;">
+		</div>
+	</body>
+</html>
+function start(){
+sjs.open();
+	var text = new sjs.Text("Hello welcome to my game! C:", 21, "white");
+	text.centerH().offset(0,100);
+	var button = new sjs.Button("Try it out! :D", function(){
+		window.location = "level1.firstpage.html";
+	});
+	button.center();<html>
+	<head>
+		<title>
+			Custom Game LVL 1
+		</title>
+		<script src="https://simplycodingcourses.com/files/simply.js"></script>
+		<script>
+		var level = [];
+		function start(){
+			sjs.open("target",1200,750);
+			//background properties
+			var background = new sjs.Image("Images/background2.png");
+			background.setSize(1200,750);
+			//player properties
+			var player = new sjs.Image("Images/player.png");
+				player.type = "player";
+				player.setSize(50,75);
+				player.setGravity();
+				player.friction = 0.2;
+				player.noBounds = true;
+				player.bottom();
+				
+
+			sjs.loadImageArray('[{"width":63,"height":100,"x":485,"y":679,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":546,"y":633,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":624,"y":601,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":361,"y":471,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":403,"y":554,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":523,"y":458,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":601,"y":360,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":80,"height":50,"x":684,"y":580,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall2.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":266,"y":648,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":50,"height":50,"x":107,"y":700,"sx":0,"sy":0,"ay":1,"topSpeed":10,"src":"Images/crate.png","alt":"add text","type":"crate","friction":0,"classType":"Image","noBounds":true},{"width":100,"height":75,"x":159.5,"y":675,"sx":2.5,"sy":1,"ay":1,"topSpeed":10,"src":"Images/enemy-walkright/enemy_walk9gif.gif","alt":"add text","type":"enemy","facingLeft":false,"left_img":"Images/enemy-walkleft/enemy-walkleftgif.gif","right_img":"Images/enemy-walkright/enemy_walk9gif.gif","friction":0,"classType":"Image","noBounds":true},{"width":100,"height":75,"x":-944,"y":74367,"sx":-2.5,"sy":384,"ay":1,"topSpeed":10,"src":"Images/enemy-walkleft/enemy-walkleftgif.gif","alt":"add text","type":"enemy","facingLeft":true,"left_img":"Images/enemy-walkleft/enemy-walkleftgif.gif","right_img":"Images/enemy-walkright/enemy_walk9gif.gif","friction":0,"classType":"Image","noBounds":true},{"width":50,"height":50,"x":426,"y":504,"sx":0,"sy":1,"ay":1,"topSpeed":10,"src":"Images/crate.png","alt":"add text","type":"crate","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":361,"y":373,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":63,"height":100,"x":702,"y":480,"sx":0,"sy":0,"topSpeed":10,"src":"Images/wall.png","alt":"add text","type":"wall","friction":0,"classType":"Image","noBounds":true},{"width":50,"height":50,"x":551,"y":408,"sx":0,"sy":0,"ay":1,"topSpeed":10,"src":"Images/crate.png","alt":"add text","type":"crate","friction":0,"classType":"Image","noBounds":true}]');
+
+			//player keydowns
+			var r_images = ["Images/player_rwalk/rwalk_1.png","Images/player_rwalk/rwalk_2.png","Images/player_rwalk/rwalk_3.png","Images/player_rwalk/rwalk_4.png","Images/player_rwalk/rwalk_5.png","Images/player_rwalk/rwalk_6.png","Images/player_rwalk/rwalk_7.png","Images/player_rwalk/rwalk_8.png","Images/player_rwalk/rwalk_9.png","Images/player_rwalk/rwalk_10.png","Images/player_rwalk/rwalk_11.png","Images/player_rwalk/rwalk_12.png","Images/player_rwalk/rwalk_13.png","Images/player_rwalk/rwalk_14.png","Images/player_rwalk/rwalk_15.png","Images/player_rwalk/rwalk_16.png"];
+			var l_images = ["Images/player_lwalk/lwalk_1.png","Images/player_lwalk/lwalk_2.png","Images/player_lwalk/lwalk_3.png","Images/player_lwalk/lwalk_4.png","Images/player_lwalk/lwalk_5.png","Images/player_lwalk/lwalk_6.png","Images/player_lwalk/lwalk_7.png","Images/player_lwalk/lwalk_8.png","Images/player_lwalk/lwalk_9.png","Images/player_lwalk/lwalk_10.png","Images/player_lwalk/lwalk_11.png","Images/player_lwalk/lwalk_12.png","Images/player_lwalk/lwalk_13.png","Images/player_lwalk/lwalk_14.png","Images/player_lwalk/lwalk_15.png","Images/player_lwalk/lwalk_16.png",];
+			var r_facing = true;
+			var r_track = 0;
+			var l_track = 0;
+			
+			sjs.keyDown(RIGHT_KEY, function(){
+				player.pushRight(1);
+				r_facing = true;
+				r_track = r_track + 1;
+				player.setImage(r_images[r_track]);
+				if(r_track == 15){
+					r_track = 0;
+				}
+			});
+			sjs.keyDown(LEFT_KEY, function(){
+				player.pushLeft(1);
+				r_facing = false;
+				l_track = l_track + 1;
+				player.setImage(l_images[l_track]);
+				if(l_track == 15){
+					l_track = 0;
+				}
+
+			});
+
+			var shoot = true;
+			sjs.keyDown(SPACE_KEY, function(){
+				if(shoot == true){
+					var laser = new sjs.Image("Images/laser1.png");
+					laser.type = "laser";
+					laser.friction = 0;
+					laser.noBounds = true;
+					laser.setSize(100,50);
+					shoot = false;
+				} if (r_facing == true) {
+					player.setImage("Images/player-rightshoot/player-rightshootgif.gif")
+					laser.moveTo(player.getX()+1,player.getY()+7);
+					laser.pushRight(25.5);
+				} else if (r_facing == false){
+					player.setImage("Images/player-leftshoot/player-leftshootgif.gif")
+					laser.moveTo(player.getX()+-60,player.getY()+7);
+					laser.pushLeft(25.5)
+				}
+				setTimeout(function(){
+					shoot = true;
+				},1000);
+			});
+
+			var boss = new sjs.Image("Images/boss.png");
+				boss.type = "boss";
+				boss.center().offset(-sjs.gx,10);
+				boss.setHeight(200);
+				boss.noBounds = true;
+				boss.friction = 0;
+				boss.setHFlipImages("Images/boss_walkdown/boss_walkdown.gif","Images/boss_walkup/boss_walkup.gif");
+				boss.pushDown(2.5);
+				boss.moveTo(+1075,+100);
+
+
+			
+			setInterval(function(){
+					var time = Math.round(1 + Math.random()*11);
+						if(Math.random() > 0.5){
+							var laser2 = new sjs.Image("Images/laser2.png");
+							laser2.type = "laser2";
+							laser2.setSize(100,50);
+							laser2.moveTo(boss.getX()+-10,boss.getY()+100);
+							laser2.friction = 0;
+							laser2.noBounds = true;
+							laser2.pushLeft(25);
+							boss.setImage("Images/boss-shoot/boss-shootgif.gif");
+						} else {
+
+						}
+			},1000);
+
+
+
+			//jumping
+			
+			var jump = true;
+			sjs.keyDown(UP_KEY, function(){
+				if(jump == true){
+					jump = false;
+					player.pushUp(15);
+				}
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == RIGHT_KEY){
+					player.setImage("Images/player.png");
+					r_track = 0;
+				} else if (e.keyCode == LEFT_KEY){
+					player.setImage("Images/player.png");
+					l_track = 0;
+				}	
+			});
+
+
+			sjs.onHit("player","bottom_screen", function(x,y){
+				jump = true;
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","left_screen", function(x,y){
+				sjs.bounceOff(x,y);j
+			});
+
+			sjs.onHit("crate","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			sjs.onHit("crate"["left_screen","right_screen"], function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","crate", function(x,y){
+				sjs.stoppedBy(y,x);
+			});
+
+		sjs.onHit("player","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(y,x);
+				}
+
+			});
+
+			sjs.onHit("player","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("enemy","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("player","enemy", function(x,y){
+				x.destroy();
+				window.location = "gameover.html";
+			});
+
+			sjs.onHit("enemy","laser", function(x,y){
+				x.destroy();
+				y.destroy();
+			});
+
+			sjs.onHit("laser",["crate","wall","wall2"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+
+			sjs.onHit("boss","bottom_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkup/boss_walkup.gif");
+			});
+
+			sjs.onHit("boss","top_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkdown/boss_walkdown.gif");
+			});
+
+			sjs.onHit("boss","bottom_screen", function(x,y){
+				sjs.bounceOff(x,y);
+					x.setImage("Images/boss_walkup/boss_walkup.gif");
+			});
+
+			sjs.onHit("boss","top_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkdown/boss_walkdown.gif");
+			});
+
+			sjs.onHit("boss","laser", function(x,y){
+				x.destroy();
+				y.destroy();
+				window.location = "win.html";
+			});
+
+			sjs.onHit("player","laser2", function(x,y){
+				x.destroy();
+				y.destroy();
+				window.location = "gameover.html";
+			})
+
+			sjs.onHit("player","boss", function(x,y){
+				x.destroy();
+				window.location = "gameover.html";
+			});
+
+			sjs.onHit("laser2",["crate","wall","wall2"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+<html>
+<head>
+	<title>
+		GameOver!
+	</title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+
+function start(){<html>
+	<head>
+		<title>
+			Custom Game Test
+		</title>
+		<script src="https://simplycodingcourses.com/files/simply.js"></script>
+		<script>
+		var level = [];
+		function start(){
+			sjs.open("target",1200,750);
+			//background properties
+			var background = new sjs.Image("Images/background.png");
+			background.setSize(1200,750);
+			//player properties
+			var player = new sjs.Image("Images/player.png");
+			player.type = "player";
+			player.setSize(50,75);
+			player.setGravity();
+			player.friction = 0.2;
+			player.noBounds = true;
+			player.bottom();
+
+
+
+
+
+
+
+
+			sjs.loadImageArray(localStorage.getItem('level'));
+
+			//player keydowns
+			var r_images = ["Images/player_rwalk/rwalk_1.png","Images/player_rwalk/rwalk_2.png","Images/player_rwalk/rwalk_3.png","Images/player_rwalk/rwalk_4.png","Images/player_rwalk/rwalk_5.png","Images/player_rwalk/rwalk_6.png","Images/player_rwalk/rwalk_7.png","Images/player_rwalk/rwalk_8.png","Images/player_rwalk/rwalk_9.png","Images/player_rwalk/rwalk_10.png","Images/player_rwalk/rwalk_11.png","Images/player_rwalk/rwalk_12.png","Images/player_rwalk/rwalk_13.png","Images/player_rwalk/rwalk_14.png","Images/player_rwalk/rwalk_15.png","Images/player_rwalk/rwalk_16.png"];
+			var l_images = ["Images/player_lwalk/lwalk_1.png","Images/player_lwalk/lwalk_2.png","Images/player_lwalk/lwalk_3.png","Images/player_lwalk/lwalk_4.png","Images/player_lwalk/lwalk_5.png","Images/player_lwalk/lwalk_6.png","Images/player_lwalk/lwalk_7.png","Images/player_lwalk/lwalk_8.png","Images/player_lwalk/lwalk_9.png","Images/player_lwalk/lwalk_10.png","Images/player_lwalk/lwalk_11.png","Images/player_lwalk/lwalk_12.png","Images/player_lwalk/lwalk_13.png","Images/player_lwalk/lwalk_14.png","Images/player_lwalk/lwalk_15.png","Images/player_lwalk/lwalk_16.png",];
+			var r_facing = true;
+			var r_track = 0;
+			var l_track = 0;
+			
+			sjs.keyDown(RIGHT_KEY, function(){
+				player.pushRight(1);
+				r_facing = true;
+				r_track = r_track + 1;
+				player.setImage(r_images[r_track]);
+				if(r_track == 15){
+					r_track = 0;
+				}
+			});
+			sjs.keyDown(LEFT_KEY, function(){
+				player.pushLeft(1);
+				r_facing = false;
+				l_track = l_track + 1;
+				player.setImage(l_images[l_track]);
+				if(l_track == 15){
+					l_track = 0;
+				}
+
+			});
+
+			var shoot = true;
+			sjs.keyDown(SPACE_KEY, function(){
+				if(shoot == true){
+					var laser = new sjs.Image("Images/laser1.png");
+					laser.type = "laser";
+					laser.friction = 0;
+					laser.noBounds = true;
+					laser.setSize(100,50);
+					shoot = false;
+				} if (r_facing == true) {
+					player.setImage("Images/player-rightshoot/player-rightshootgif.gif")
+					laser.moveTo(player.getX()+1,player.getY()+7);
+					laser.pushRight(25.5);
+				} else if (r_facing == false){
+					player.setImage("Images/player-leftshoot/player-leftshootgif.gif")
+					laser.moveTo(player.getX()+-60,player.getY()+7);
+					laser.pushLeft(25.5)
+				}
+				setTimeout(function(){
+					shoot = true;
+				},2000);
+			});
+
+
+
+
+			//jumping
+			
+			var jump = true;
+			sjs.keyDown(UP_KEY, function(){
+				if(jump == true){
+					jump = false;
+					player.pushUp(15);
+				}
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == RIGHT_KEY){
+					player.setImage("Images/player.png");
+					r_track = 0;
+				} else if (e.keyCode == LEFT_KEY){
+					player.setImage("Images/player.png");
+					l_track = 0;
+				}	
+			});
+
+			//onhits
+
+			sjs.onHit("player","bottom_screen", function(x,y){
+				jump = true;
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("crate","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			sjs.onHit("crate",["left_screen","right_screen"], function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(y,x);
+				}
+
+			});
+			sjs.onHit("player","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			
+			sjs.onHit("player","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall2", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("player","left_screen", function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("player","right_screen", function(x,y){
+				window.location = "customgame2.html";
+			});
+
+
+			sjs.onHit("crate","wall2", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("enemy","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("player","enemy", function(x,y){
+				x.destroy();
+			});
+
+			sjs.onHit("enemy","laser", function(x,y){
+				x.destroy();
+				y.destroy();
+			});
+
+			sjs.onHit("laser",["crate","wall","wall2"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+	<head>
+		<title>
+			Custom Game Test
+		</title>
+		<script src="https://simplycodingcourses.com/files/simply.js"></script>
+		<script>
+		var level = [];
+		function start(){
+			sjs.open("target",1200,750);
+			//background properties
+			var background = new sjs.Image("Images/background2.png");
+			background.setSize(1200,750);
+			//player properties
+			var player = new sjs.Image("Images/player.png");
+				player.type = "player";
+				player.setSize(50,75);
+				player.setGravity();
+				player.friction = 0.2;
+				player.noBounds = true;
+				player.bottom();
+				
+
+				sjs.loadImageArray(localStorage.getItem('level'));
+
+			//player keydowns
+			var r_images = ["Images/player_rwalk/rwalk_1.png","Images/player_rwalk/rwalk_2.png","Images/player_rwalk/rwalk_3.png","Images/player_rwalk/rwalk_4.png","Images/player_rwalk/rwalk_5.png","Images/player_rwalk/rwalk_6.png","Images/player_rwalk/rwalk_7.png","Images/player_rwalk/rwalk_8.png","Images/player_rwalk/rwalk_9.png","Images/player_rwalk/rwalk_10.png","Images/player_rwalk/rwalk_11.png","Images/player_rwalk/rwalk_12.png","Images/player_rwalk/rwalk_13.png","Images/player_rwalk/rwalk_14.png","Images/player_rwalk/rwalk_15.png","Images/player_rwalk/rwalk_16.png"];
+			var l_images = ["Images/player_lwalk/lwalk_1.png","Images/player_lwalk/lwalk_2.png","Images/player_lwalk/lwalk_3.png","Images/player_lwalk/lwalk_4.png","Images/player_lwalk/lwalk_5.png","Images/player_lwalk/lwalk_6.png","Images/player_lwalk/lwalk_7.png","Images/player_lwalk/lwalk_8.png","Images/player_lwalk/lwalk_9.png","Images/player_lwalk/lwalk_10.png","Images/player_lwalk/lwalk_11.png","Images/player_lwalk/lwalk_12.png","Images/player_lwalk/lwalk_13.png","Images/player_lwalk/lwalk_14.png","Images/player_lwalk/lwalk_15.png","Images/player_lwalk/lwalk_16.png",];
+			var r_facing = true;
+			var r_track = 0;
+			var l_track = 0;
+			
+			sjs.keyDown(RIGHT_KEY, function(){
+				player.pushRight(1);
+				r_facing = true;
+				r_track = r_track + 1;
+				player.setImage(r_images[r_track]);
+				if(r_track == 15){
+					r_track = 0;
+				}
+			});
+			sjs.keyDown(LEFT_KEY, function(){
+				player.pushLeft(1);
+				r_facing = false;
+				l_track = l_track + 1;
+				player.setImage(l_images[l_track]);
+				if(l_track == 15){
+					l_track = 0;
+				}
+
+			});
+
+			var shoot = true;
+			sjs.keyDown(SPACE_KEY, function(){
+				if(shoot == true){
+					var laser = new sjs.Image("Images/laser1.png");
+					laser.type = "laser";
+					laser.friction = 0;
+					laser.noBounds = true;
+					laser.setSize(100,50);
+					shoot = false;
+				} if (r_facing == true) {
+					player.setImage("Images/player-rightshoot/player-rightshootgif.gif")
+					laser.moveTo(player.getX()+1,player.getY()+7);
+					laser.pushRight(25.5);
+				} else if (r_facing == false){
+					player.setImage("Images/player-leftshoot/player-leftshootgif.gif")
+					laser.moveTo(player.getX()+-60,player.getY()+7);
+					laser.pushLeft(25.5)
+				}
+				setTimeout(function(){
+					shoot = true;
+				},1000);
+			});
+
+			var boss = new sjs.Image("Images/boss.png");
+				boss.type = "boss";
+				boss.center().offset(-sjs.gx,10);
+				boss.setHeight(200);
+				boss.noBounds = true;
+				boss.friction = 0;
+				boss.setHFlipImages("Images/boss_walkdown/boss_walkdown.gif","Images/boss_walkup/boss_walkup.gif");
+				boss.pushDown(2.5);
+				boss.moveTo(+1075,+100);
+
+
+			
+			setInterval(function(){
+					var time = Math.round(1 + Math.random()*11);
+						if(Math.random() > 0.5){
+							var laser2 = new sjs.Image("Images/laser2.png");
+							laser2.type = "laser2";
+							laser2.setSize(100,50);
+							laser2.moveTo(boss.getX()+-10,boss.getY()+100);
+							laser2.friction = 0;
+							laser2.noBounds = true;
+							laser2.pushLeft(25);
+							boss.setImage("Images/boss-shoot/boss-shootgif.gif");
+						} else {
+
+						}
+			},1000);
+
+
+
+			//jumping
+			
+			var jump = true;
+			sjs.keyDown(UP_KEY, function(){
+				if(jump == true){
+					jump = false;
+					player.pushUp(15);
+				}
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == RIGHT_KEY){
+					player.setImage("Images/player.png");
+					r_track = 0;
+				} else if (e.keyCode == LEFT_KEY){
+					player.setImage("Images/player.png");
+					l_track = 0;
+				}	
+			});
+
+
+			sjs.onHit("player","bottom_screen", function(x,y){
+				jump = true;
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","left_screen", function(x,y){
+				sjs.bounceOff(x,y);j
+			});
+
+			sjs.onHit("crate","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			sjs.onHit("crate"["left_screen","right_screen"], function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","crate", function(x,y){
+				sjs.stoppedBy(y,x);
+			});
+
+		sjs.onHit("player","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(y,x);
+				}
+
+			});
+
+			sjs.onHit("player","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("enemy","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("player","enemy", function(x,y){
+				x.destroy();
+			});
+
+			sjs.onHit("enemy","laser", function(x,y){
+				x.destroy();
+				y.destroy();
+			});
+
+			sjs.onHit("laser",["crate","wall","wall2"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+
+			sjs.onHit("boss","bottom_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkup/boss_walkup.gif");
+			});
+
+			sjs.onHit("boss","top_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkdown/boss_walkdown.gif");
+			});
+
+			sjs.onHit("boss","bottom_screen", function(x,y){
+				sjs.bounceOff(x,y);
+					x.setImage("Images/boss_walkup/boss_walkup.gif");
+			});
+
+			sjs.onHit("boss","top_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkdown/boss_walkdown.gif");
+			});
+
+			sjs.onHit("boss","laser", function(x,y){
+				x.destroy();
+				y.destroy();
+			});
+
+			sjs.onHit("player","laser2", function(x,y){
+				x.destroy();
+				y.destroy();
+			})
+
+			sjs.onHit("player","boss", function(x,y){
+				x.destroy();
+			});
+
+			sjs.onHit("laser2",["crate","wall","wall2"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+<html>
+<head>
+	<title>
+		You WON!
+	</title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script><html>
+	<head>
+		<title>
+			Custom Game
+		</title>
+		<script src="https://simplycodingcourses.com/files/simply.js"></script>
+		<script>
+		var level = [];
+		function start(){
+			sjs.open("target",1200,750);
+			//background properties
+			var background = new sjs.Image("Images/background.png");
+			background.setSize(1200,750);
+			//player properties
+			var player = new sjs.Image("Images/player.png");
+			player.type = "player";
+			player.setSize(50,75);
+			player.setGravity();
+			player.friction = 0.2;
+			player.noBounds = true;
+			player.bottom();
+
+
+			var testBtn = new sjs.Button("Test", function(){
+				localStorage.setItem('level', sjs.saveImageArray(level));
+				window.open('test1.html');
+			});
+
+			var ShowBtn = new sjs.Button("Show", function(){
+				var output = document.querySelector("#target");
+				output.innerHTML = sjs.saveImageArray(level);
+			});
+
+			ShowBtn.offset(75, 0);
+
+
+			//player keydowns
+			var r_images = ["Images/player_rwalk/rwalk_1.png","Images/player_rwalk/rwalk_2.png","Images/player_rwalk/rwalk_3.png","Images/player_rwalk/rwalk_4.png","Images/player_rwalk/rwalk_5.png","Images/player_rwalk/rwalk_6.png","Images/player_rwalk/rwalk_7.png","Images/player_rwalk/rwalk_8.png","Images/player_rwalk/rwalk_9.png","Images/player_rwalk/rwalk_10.png","Images/player_rwalk/rwalk_11.png","Images/player_rwalk/rwalk_12.png","Images/player_rwalk/rwalk_13.png","Images/player_rwalk/rwalk_14.png","Images/player_rwalk/rwalk_15.png","Images/player_rwalk/rwalk_16.png"];
+			var l_images = ["Images/player_lwalk/lwalk_1.png","Images/player_lwalk/lwalk_2.png","Images/player_lwalk/lwalk_3.png","Images/player_lwalk/lwalk_4.png","Images/player_lwalk/lwalk_5.png","Images/player_lwalk/lwalk_6.png","Images/player_lwalk/lwalk_7.png","Images/player_lwalk/lwalk_8.png","Images/player_lwalk/lwalk_9.png","Images/player_lwalk/lwalk_10.png","Images/player_lwalk/lwalk_11.png","Images/player_lwalk/lwalk_12.png","Images/player_lwalk/lwalk_13.png","Images/player_lwalk/lwalk_14.png","Images/player_lwalk/lwalk_15.png","Images/player_lwalk/lwalk_16.png",];
+			var r_facing = true;
+			var r_track = 0;
+			var l_track = 0;
+			
+			sjs.keyDown(RIGHT_KEY, function(){
+				player.pushRight(1);
+				r_facing = true;
+				r_track = r_track + 1;
+				player.setImage(r_images[r_track]);
+				if(r_track == 15){
+					r_track = 0;
+				}
+			});
+			sjs.keyDown(LEFT_KEY, function(){
+				player.pushLeft(1);
+				r_facing = false;
+				l_track = l_track + 1;
+				player.setImage(l_images[l_track]);
+				if(l_track == 15){
+					l_track = 0;
+				}
+
+			});
+
+
+
+			//jumping
+			
+			var jump = true;
+			sjs.keyDown(UP_KEY, function(){
+				if(jump == true){
+					jump = false;
+					player.pushUp(15);
+				}
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == RIGHT_KEY){
+					player.setImage("Images/player.png");
+					r_track = 0;
+				} else if (e.keyCode == LEFT_KEY){
+					player.setImage("Images/player.png");
+					l_track = 0;
+				}	
+			});
+
+			//onhits
+
+			sjs.onHit("player","bottom_screen", function(x,y){
+				jump = true;
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("crate","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			sjs.onHit("crate",["left_screen","right_screen"], function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(y,x);
+				}
+
+			});
+			sjs.onHit("player","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			
+			sjs.onHit("player","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall2", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("player","left_screen", function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("player","right_screen", function(x,y){
+				window.location = "customgame2.html";
+			});
+
+
+			sjs.onHit("crate","wall2", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("enemy","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+		} // end start
+
+
+		function crate(){
+			var crate = new sjs.Image("Images/crate.png");
+			level.push(crate);
+			crate.type = "crate";
+			crate.center().offset(-sjs.gx,10);
+			crate.setHeight(50);
+			crate.noBounds = true;
+			crate.friction = 0;
+			crate.onMouseDown(function(){
+				crate.draggable();
+				crate.follow(sjs.mouse);
+				crate.removeGravity();
+			});
+			crate.onMouseUp(function(){
+				crate.unfollow(sjs.mouse);
+				crate.setGravity();
+			});
+		}
+
+		function wall(){
+			var wall = new sjs.Image("Images/wall.png");
+			level.push(wall);
+			wall.type = "wall";
+			wall.center().offset(-sjs.gx,10);
+			wall.setHeight(100);
+			wall.noBounds = true;
+			wall.friction = 0;
+			wall.onMouseDown(function(){
+				wall.draggable();
+				wall.follow(sjs.mouse);
+			});
+		}
+
+		function wall2(){
+			var wall = new sjs.Image("Images/wall2.png");
+			level.push(wall);
+			wall.type = "wall";
+			wall.center().offset(-sjs.gx,10);
+			wall.setHeight(50);
+			wall.noBounds = true;
+			wall.friction = 0;
+			wall.onMouseDown(function(){
+				wall.draggable();
+				wall.follow(sjs.mouse);
+			});
+		}
+
+
+
+		function enemy(){
+			var enemy = new sjs.Image("Images/enemy.png");
+			level.push(enemy);
+			enemy.type = "enemy";
+			enemy.center().offset(-sjs.gx,10);
+			enemy.setSize(100,75);
+			enemy.noBounds = true;
+			enemy.friction = 0;
+			enemy.setHFlipImages("Images/enemy-walkleft/enemy-walkleftgif.gif","Images/enemy-walkright/enemy_walk9gif.gif");
+			enemy.onMouseDown(function(){
+				enemy.draggable();
+				enemy.follow(sjs.mouse);
+				enemy.stop();
+				enemy.removeGravity();
+			});
+			enemy.onMouseUp(function(){
+				enemy.unfollow(sjs.mouse);
+				enemy.setGravity();
+				enemy.pushHFacing();
+				enemy.accel = .10;
+			});
+
+		}
+
+
+
+
+
+
+		</script><html>
+	<head>
+		<title>
+			Custom Game
+		</title>
+		<script src="https://simplycodingcourses.com/files/simply.js"></script>
+		<script>
+		var level = [];
+		function start(){
+			sjs.open("target",1200,750);
+			//background properties
+			var background = new sjs.Image("Images/background2.png");
+			background.setSize(1200,750);
+			//player properties
+			var player = new sjs.Image("Images/player.png");
+			player.type = "player";
+			player.setSize(50,75);
+			player.setGravity();
+			player.friction = 0.2;
+			player.noBounds = true;
+			player.bottom();
+
+			var testBtn = new sjs.Button("Test", function(){
+				localStorage.setItem('level', sjs.saveImageArray(level));
+				window.open('test2.html');
+			});
+
+
+			var ShowBtn = new sjs.Button("Show", function(){
+				var output = document.querySelector("#target");
+				output.innerHTML = sjs.saveImageArray(level);
+			});
+
+			ShowBtn.offset(75, 0);
+
+			//player keydowns
+			var r_images = ["Images/player_rwalk/rwalk_1.png","Images/player_rwalk/rwalk_2.png","Images/player_rwalk/rwalk_3.png","Images/player_rwalk/rwalk_4.png","Images/player_rwalk/rwalk_5.png","Images/player_rwalk/rwalk_6.png","Images/player_rwalk/rwalk_7.png","Images/player_rwalk/rwalk_8.png","Images/player_rwalk/rwalk_9.png","Images/player_rwalk/rwalk_10.png","Images/player_rwalk/rwalk_11.png","Images/player_rwalk/rwalk_12.png","Images/player_rwalk/rwalk_13.png","Images/player_rwalk/rwalk_14.png","Images/player_rwalk/rwalk_15.png","Images/player_rwalk/rwalk_16.png"];
+			var l_images = ["Images/player_lwalk/lwalk_1.png","Images/player_lwalk/lwalk_2.png","Images/player_lwalk/lwalk_3.png","Images/player_lwalk/lwalk_4.png","Images/player_lwalk/lwalk_5.png","Images/player_lwalk/lwalk_6.png","Images/player_lwalk/lwalk_7.png","Images/player_lwalk/lwalk_8.png","Images/player_lwalk/lwalk_9.png","Images/player_lwalk/lwalk_10.png","Images/player_lwalk/lwalk_11.png","Images/player_lwalk/lwalk_12.png","Images/player_lwalk/lwalk_13.png","Images/player_lwalk/lwalk_14.png","Images/player_lwalk/lwalk_15.png","Images/player_lwalk/lwalk_16.png",];
+			var r_facing = true;
+			var r_track = 0;
+			var l_track = 0;
+			
+			sjs.keyDown(RIGHT_KEY, function(){
+				player.pushRight(1);
+				r_facing = true;
+				r_track = r_track + 1;
+				player.setImage(r_images[r_track]);
+				if(r_track == 15){
+					r_track = 0;
+				}
+			});
+			sjs.keyDown(LEFT_KEY, function(){
+				player.pushLeft(1);
+				r_facing = false;
+				l_track = l_track + 1;
+				player.setImage(l_images[l_track]);
+				if(l_track == 15){
+					l_track = 0;
+				}
+
+			});
+
+			var shoot = true;
+			sjs.keyDown(SPACE_KEY, function(){
+				if(shoot == true){
+					var laser = new sjs.Image("Images/laser1.png");
+					laser.type = "laser";
+					laser.friction = 0;
+					laser.noBounds = true;
+					laser.setSize(100,50);
+					shoot = false;
+				} if (r_facing == true) {
+					player.setImage("Images/player-rightshoot/player-rightshootgif.gif")
+					laser.moveTo(player.getX()+1,player.getY()+7);
+					laser.pushRight(25.5);
+				} else if (r_facing == false){
+					player.setImage("Images/player-leftshoot/player-leftshootgif.gif")
+					laser.moveTo(player.getX()+-60,player.getY()+7);
+					laser.pushLeft(25.5)
+				}
+				setTimeout(function(){
+					shoot = true;
+				},1000);
+			});
+
+			var boss = new sjs.Image("Images/boss.png");
+				boss.type = "boss";
+				boss.center().offset(-sjs.gx,10);
+				boss.setHeight(200);
+				boss.noBounds = true;
+				boss.friction = 0;
+				boss.setHFlipImages("Images/boss_walkdown/boss_walkdown.gif","Images/boss_walkup/boss_walkup.gif");
+				boss.pushDown(2.5);
+				boss.moveTo(+1075,+100);
+
+			
+
+
+
+			//jumping
+			
+			var jump = true;
+			sjs.keyDown(UP_KEY, function(){
+				if(jump == true){
+					jump = false;
+					player.pushUp(15);
+				}
+			});
+
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode == RIGHT_KEY){
+					player.setImage("Images/player.png");
+					r_track = 0;
+				} else if (e.keyCode == LEFT_KEY){
+					player.setImage("Images/player.png");
+					l_track = 0;
+				}	
+			});
+
+
+			sjs.onHit("player","bottom_screen", function(x,y){
+				jump = true;
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","left_screen", function(x,y){
+				sjs.bounceOff(x,y);j
+			});
+
+			sjs.onHit("crate","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+			sjs.onHit("crate"["left_screen","right_screen"], function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("player","crate", function(x,y){
+				sjs.stoppedBy(y,x);
+			});
+
+		sjs.onHit("player","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(y,x);
+				}
+
+			});
+
+			sjs.onHit("player","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+					jump = true;
+				} else {
+					sjs.stoppedBy(x,y);
+				}
+			});
+
+			sjs.onHit("crate","wall", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy","bottom_screen", function(x,y){
+				sjs.stoppedBy(x,y);
+			});
+
+			sjs.onHit("enemy",["left_screen","right_screen"], function(x,y){
+				sjs.bounceOff(x,y);
+			});
+			sjs.onHit("enemy","wall", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","wall2", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+			sjs.onHit("enemy","crate", function(x,y){
+				if(x.isAboveOf(y) == true){
+					sjs.stoppedBy(x,y);
+				} else {
+					sjs.bounceOff(x,y);
+				}
+			});
+
+
+
+
+
+
+
+			sjs.onHit("boss","bottom_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkup/boss_walkup.gif");
+			});
+
+			sjs.onHit("boss","top_screen", function(x,y){
+				sjs.bounceOff(x,y);
+				x.setImage("Images/boss_walkdown/boss_walkdown.gif");
+			});
+
+
+
+
+
+
+			
+		} // end start
+
+		function crate(){
+			var crate = new sjs.Image("Images/crate.png");
+			level.push(crate);
+			crate.type = "crate";
+			crate.center().offset(-sjs.gx,10);
+			crate.setHeight(50);
+			crate.noBounds = true;
+			crate.friction = 0;
+			crate.onMouseDown(function(){
+				crate.draggable();
+				crate.follow(sjs.mouse);
+				crate.removeGravity();
+			});
+			crate.onMouseUp(function(){
+				crate.unfollow(sjs.mouse);
+				crate.setGravity();
+			});
+		}
+
+		function wall(){
+			var wall = new sjs.Image("Images/wall.png");
+			level.push(wall);
+			wall.type = "wall";
+			wall.center().offset(-sjs.gx,10);
+			wall.setHeight(100);
+			wall.noBounds = true;
+			wall.friction = 0;
+			wall.onMouseDown(function(){
+				wall.draggable();
+				wall.follow(sjs.mouse);
+			});
+		}
+
+		function wall2(){
+			var wall = new sjs.Image("Images/wall2.png");
+			level.push(wall);
+			wall.type = "wall";
+			wall.center().offset(-sjs.gx,10);
+			wall.setHeight(50);
+			wall.noBounds = true;
+			wall.friction = 0;
+			wall.onMouseDown(function(){
+				wall.draggable();
+				wall.follow(sjs.mouse);
+			});
+		}
+
+		function enemy(){
+			var enemy = new sjs.Image("Images/enemy.png");
+			level.push(enemy);
+			enemy.type = "enemy";
+			enemy.center().offset(-sjs.gx,10);
+			enemy.setSize(100,75);
+			enemy.noBounds = true;
+			enemy.friction = 0;
+			enemy.setHFlipImages("Images/enemy-walkleft/enemy-walkleftgif.gif","Images/enemy-walkright/enemy_walk9gif.gif");
+			enemy.onMouseDown(function(){
+				enemy.draggable();
+				enemy.follow(sjs.mouse);
+				enemy.stop();
+				enemy.removeGravity();
+			});
+			enemy.onMouseUp(function(){
+				enemy.unfollow(sjs.mouse);
+				enemy.setGravity();
+				enemy.pushHFacing();
+				enemy.accel = .10;
+			});
+
+		}
+
+
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>
+			Custom Game Editor
+		<center>
+				<input type ="image" src = "Images/crate.png" onclick = "crate()" height = "50" width = "50" >
+				<input type ="image" src = "Images/wall.png" onclick = "wall()" height = "50" width = "50" >
+				<input type ="image" src = "Images/wall2.png" onclick = "wall2()" height = "50" width = "50" >
+				<input type ="image" src = "Images/enemy.png" onclick = "enemy()" height = "50" width = "50" >
+				<input type ="image" src = "Images/boss.png" onclick = "boss()" height = "0.01" width = "0.01" >
+		</center>
+		</h1>
+		<br>
+		</br>
+		<div id="target" style="margin:auto;background:grey;">
+		</div>
+	</body>
+</html>
+	</head>
+	<body onload="start()">
+		<h1>
+			Custom Game Editor
+		<center>
+				<input type ="image" src = "Images/crate.png" onclick = "crate()" height = "50" width = "50" >
+				<input type ="image" src = "Images/wall.png" onclick = "wall()" height = "50" width = "50" >
+				<input type ="image" src = "Images/wall2.png" onclick = "wall2()" height = "50" width = "50" >
+				<input type ="image" src = "Images/enemy.png" onclick = "enemy()" height = "50" width = "50" >
+		</center>
+		</h1>
+		<br>
+		</br>
+		<div id="target" style="margin:auto;background:grey;">
+		</div>
+	</body>
+</html>
+
+function start(){
+sjs.open();
+	var text = new sjs.Text("You Won :D!", 21, "white");
+	text.centerH().offset(0,100);
+	var button = new sjs.Button("Play again?", function(){
+		window.location = "index.html";
+	});
+	button.center();
+
+
+
+}
+</script>
+</head>
+<body onload="start()">
+	<center>
+		<h1>
+			YOU WON :D
+		</h1>
+	</center>
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
+			
+		} // end start
+
+
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>
+			Custom Game Editor
+		<center>
+			<input type ="image" src = "Images/boss.png" onclick = "boss()" height = "0.01" width = "0.01" >
+		</center>
+		</h1>
+		<br>
+		</br>
+		<div id="target" style="margin:auto;background:grey;">
+		</div>
+	</body>
+</html>
+		} // end start
+
+
+
+
+
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>
+			Custom Game Test
+		<center>
+		</center>
+		</h1>
+		<br>
+		</br>
+		<div id="target" style="margin:auto;background:grey;">
+		</div>
+	</body>
+</html>
+sjs.open();
+	var text = new sjs.Text("You Lost!", 21, "white");
+	text.centerH().offset(0,100);
+	var button = new sjs.Button("Try again?", function(){
+		window.location = "index.html";
+	});
+	button.center();
+
+
+
+}
+</script>
+</head>
+<body onload="start()">
+	<center>
+		<h1>
+			GameOver! :(
+		</h1>
+	</center>
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
+			
+		} // end start
+
+
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>
+			Custom Game LVL 1
+		<center>
+			<input type ="image" src = "Images/boss.png" onclick = "boss()" height = "0.01" width = "0.01" >
+		</center>
+		</h1>
+		<br>
+		</br>
+		<div id="target" style="margin:auto;background:grey;">
+		</div>
+	</body>
+</html>
+	var yes = new sjs.Text("Space for shoot and arrow keys to move around", 21, "white");
+	yes.centerH().offset(0,300);
+
+
+
+}
+</script>
+</head>
+<body onload="start()">
+	<center>
+		<h1>
+			Menu
+		</h1>
+	</center>
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
